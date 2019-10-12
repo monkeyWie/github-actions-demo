@@ -10,22 +10,20 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Test docker
-        run: docker pull nginx
       - name: Checkout source
         uses: actions/checkout@v1
       - name: Use Golang
         uses: actions/setup-go@v1
         with:
           go-version: "1.13.x"
-      - name: Build
+      - name: Build simple
         run: |
           CGO_ENABLED=0 GOOS=windows GOARCH=amd64 go build -o simple-windows-x64.exe cmd/simple/main.go
           CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -o simple-linux-x64 cmd/simple/main.go
           CGO_ENABLED=0 GOOS=darwin GOARCH=amd64 go build -o simple-darwin-x64 cmd/simple/main.go
-          zip simple-windows-x64.zip simple-windows-x64.exe
-          zip simple-linux-x64.zip simple-linux-x64
-          zip simple-darwin-x64.zip simple-darwin-x64
+          zip simple-${{ github.ref }}-windows-x64.zip simple-windows-x64.exe
+          zip simple-${{ github.ref }}-linux-x64.zip simple-linux-x64
+          zip simple-${{ github.ref }}-darwin-x64.zip simple-darwin-x64
       - name: Create Release
         id: create_release
         uses: actions/create-release@v1.0.0
@@ -42,8 +40,8 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps
-          asset_path: ./simple-windows-x64.zip
-          asset_name: simple-windows-x64.zip
+          asset_path: ./simple-${{ github.ref }}-windows-x64.zip
+          asset_name: simple-${{ github.ref }}-windows-x64.zip
           asset_content_type: application/zip
       - name: Upload Release linux
         uses: actions/upload-release-asset@v1.0.1
@@ -51,8 +49,8 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps
-          asset_path: ./simple-linux-x64.zip
-          asset_name: simple-linux-x64.zip
+          asset_path: ./simple-${{ github.ref }}-linux-x64.zip
+          asset_name: simple-${{ github.ref }}-linux-x64.zip
           asset_content_type: application/zip
       - name: Upload Release darwin
         uses: actions/upload-release-asset@v1.0.1
@@ -60,6 +58,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps
-          asset_path: ./simple-darwin-x64.zip
-          asset_name: simple-darwin-x64.zip
+          asset_path: ./simple-${{ github.ref }}-darwin-x64.zip
+          asset_name: simple-${{ github.ref }}-darwin-x64.zip
           asset_content_type: application/zip
