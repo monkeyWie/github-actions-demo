@@ -14,6 +14,9 @@ jobs:
       - name: Use Golang
         uses: actions/setup-go@v1
         with:
-          go-version: '1.13'
+          go-version: '1.13.x'
       - name: Build
-        run: go build cmd/simple/main.go
+        run: |
+          CGO_ENABLED=0 GOOS=windows GOARCH=amd64 go build -o simple-windows-x64.exe cmd/simple/main.go
+          CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -o simple-linux-x64 cmd/simple/main.go
+          CGO_ENABLED=0 GOOS=darwin GOARCH=amd64 go build -o simple-darwin-x64 cmd/simple/main.go
