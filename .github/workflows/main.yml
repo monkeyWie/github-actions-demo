@@ -21,7 +21,7 @@ jobs:
           CGO_ENABLED=0 GOOS=windows GOARCH=amd64 go build -o simple-windows-x64.exe cmd/simple/main.go
           CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -o simple-linux-x64 cmd/simple/main.go
           CGO_ENABLED=0 GOOS=darwin GOARCH=amd64 go build -o simple-darwin-x64 cmd/simple/main.go
-          zip simple-windows-x64.exe.zip simple-windows-x64.exe
+          zip simple-windows-x64.zip simple-windows-x64.exe
           zip simple-linux-x64.zip simple-linux-x64
           zip simple-darwin-x64.zip simple-darwin-x64
       - name: Create Release
@@ -35,16 +35,16 @@ jobs:
           draft: false
           prerelease: false
       - name: Upload Release windows
-        uses: actions/upload-release-asset@v1.0.0
+        uses: actions/upload-release-asset@v1.0.1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps 
-          asset_path: ./simple-windows-x64.exe.zip
-          asset_name: simple-windows-x64.exe.zip
+          asset_path: ./simple-windows-x64.zip
+          asset_name: simple-windows-x64.zip
           asset_content_type: application/zip
       - name: Upload Release linux
-        uses: actions/upload-release-asset@v1.0.0
+        uses: actions/upload-release-asset@v1.0.1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
@@ -53,7 +53,7 @@ jobs:
           asset_name: simple-linux-x64.zip
           asset_content_type: application/zip
       - name: Upload Release darwin
-        uses: actions/upload-release-asset@v1.0.0
+        uses: actions/upload-release-asset@v1.0.1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
