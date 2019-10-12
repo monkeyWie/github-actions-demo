@@ -11,8 +11,6 @@ jobs:
     steps:
       - name: Checkout source
         uses: actions/checkout@v1
-        with:
-          ref: hexo
       - name: Use Golang
         uses: actions/setup-go@v1
         with:
