@@ -26,10 +26,7 @@ jobs:
           zip normal-darwin-x64.zip normal-darwin-x64
       - name: Build cgo
         run: |
-          echo $GOPATH
-          echo $GOROOT
           go get github.com/monkeyWie/xgo
-          find / -name xgo
           $GOROOT/bin/xgo -targets=windows/amd64,linux/amd64,darwin/amd64 -ldflags="-w -s" -pkg=cmd/cgo/main.go -out=cgo .
           mv cgo-windows-* cgo-windows-x64.exe
           mv cgo-linux-* cgo-linux-x64
