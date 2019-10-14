@@ -27,7 +27,6 @@ jobs:
       - name: Build cgo
         run: |
           go get github.com/monkeyWie/xgo
-          ls ~/go
           ~/go/bin/xgo -targets=windows/amd64,linux/amd64,darwin/amd64 -ldflags="-w -s" -pkg=cmd/cgo/main.go -out=cgo .
           mv cgo-windows-* cgo-windows-x64.exe
           mv cgo-linux-* cgo-linux-x64
