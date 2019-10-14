@@ -24,7 +24,7 @@ jobs:
           zip normal-windows-x64.zip normal-windows-x64.exe
           zip normal-linux-x64.zip normal-linux-x64
           zip normal-darwin-x64.zip normal-darwin-x64
-       - name: Build cgo
+      - name: Build cgo
         run: |
           go get github.com/monkeyWie/xgo
           xgo -targets=windows/amd64,linux/amd64,darwin/amd64 -ldflags="-w -s" -pkg=cmd/cgo/main.go -out=cgo .
@@ -44,7 +44,7 @@ jobs:
           release_name: Release ${{ github.ref }}
           draft: false
           prerelease: false
-          
+
       - name: Upload Release normal windows
         uses: actions/upload-release-asset@v1.0.1
         env:
