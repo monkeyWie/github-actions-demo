@@ -18,9 +18,9 @@ jobs:
           go-version: "1.13.x"
       - name: Build normal
         run: |
-          CGO_ENABLED=0 GOOS=windows GOARCH=amd64 go build -o normal-windows-x64.exe cmd/normal/main.go
-          CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -o normal-linux-x64 cmd/normal/main.go
-          CGO_ENABLED=0 GOOS=darwin GOARCH=amd64 go build -o normal-darwin-x64 cmd/normal/main.go
+          CGO_ENABLED=0 GOOS=windows GOARCH=amd64 go build -ldflags="-w -s" -o normal-windows-x64.exe cmd/normal/main.go
+          CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -ldflags="-w -s" -o normal-linux-x64 cmd/normal/main.go
+          CGO_ENABLED=0 GOOS=darwin GOARCH=amd64 go build -ldflags="-w -s" -o normal-darwin-x64 cmd/normal/main.go
           zip normal-windows-x64.zip normal-windows-x64.exe
           zip normal-linux-x64.zip normal-linux-x64
           zip normal-darwin-x64.zip normal-darwin-x64
