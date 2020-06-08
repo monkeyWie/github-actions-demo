@@ -1,5 +1,6 @@
 package util
 
+// Size test
 func Size(a int) string {
 	switch {
 	case a < 0:
@@ -16,22 +17,22 @@ func Size(a int) string {
 	return "enormous"
 }
 
+// Add test
 func Add(n1, n2 int) int {
 	return n1 + n2
 }
 
+// Max test
 func Max(n1, n2 int) int {
 	if n1 > n2 {
 		return n1
-	} else {
-		return n2
 	}
+	return n2
 }
 
 func min(n1, n2 int) int {
 	if n1 < n2 {
 		return n1
-	} else {
-		return n2
 	}
+	return n2
 }
