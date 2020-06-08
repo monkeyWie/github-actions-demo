@@ -12,6 +12,8 @@ categories:
       - 'bug'
   - title: '🧰 Maintenance'
     label: 'chore'
+  - title: '📖 Document'
+    label: 'doc'
 change-template: '- $TITLE @$AUTHOR (#$NUMBER)'
 version-resolver:
   major:

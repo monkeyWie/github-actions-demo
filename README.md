@@ -1,4 +1,4 @@
-测试 github actions v1.0.9
+测试 github actions v1.0.10
 
 
 [![Build Status](https://github.com/monkeyWie/github-actions-demo/workflows/build/badge.svg)](https://github.com/monkeyWie/github-actions-demo/actions?query=workflow%3Abuild)
@@ -9,12 +9,12 @@
 - create tag
 
 ```shell script
-git tag $(version)
+git tag $version
 git push --tags
 ```
 
 - delete tag
 ```shell script
-git tag -d $(version)
-git push --delete origin $(version)
+git tag -d $version
+git push --delete origin $version
 ```
