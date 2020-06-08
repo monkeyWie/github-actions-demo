@@ -30,14 +30,14 @@ jobs:
         with:
           file: ./coverage.txt
           fail_ci_if_error: true
-    build:
-      name: Build
-      runs-on: ubuntu-latest
-      needs: [lint, test]
-      steps:
-        - uses: actions/setup-go@v2
-          with:
-            go-version: '^1.13.1'
-        - uses: actions/checkout@v2
-        - name: Build
-          run: go build -o bin/main cmd/normal/main.go
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    needs: [lint, test]
+    steps:
+      - uses: actions/setup-go@v2
+        with:
+          go-version: '^1.13.1'
+      - uses: actions/checkout@v2
+      - name: Build
+        run: go build -o bin/main cmd/normal/main.go
