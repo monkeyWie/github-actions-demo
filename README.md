@@ -5,7 +5,16 @@
 [![Codecov](https://codecov.io/gh/monkeyWie/github-actions-demo/branch/master/graph/badge.svg)](https://codecov.io/gh/monkeyWie/github-actions-demo)
 
 ## Release
+
+- create tag
+
 ```shell script
 git tag $(version)
 git push --tags
+```
+
+- delete tag
+```shell script
+git tag -d $(version)
+git push --delete origin $(version)
 ```
