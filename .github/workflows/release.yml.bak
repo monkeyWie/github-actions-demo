@@ -32,13 +32,17 @@ jobs:
           zip cgo-windows-x64.zip cgo-windows-x64.exe
           zip cgo-linux-x64.zip cgo-linux-x64
           zip cgo-darwin-x64.zip cgo-darwin-x64
-      - uses: release-drafter/release-drafter@v5
+      - name: Create Release
         id: create_release
-          with:
-          # (Optional) specify config name to use, relative to .github/. Default: release-drafter.yml
-          # config-name: my-config.yml
-          env:
-            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        uses: monkeyWie/create-release@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: Release ${{ github.ref }}
+          draft: false
+          prerelease: false
+
       - name: Upload Release normal windows
         uses: actions/upload-release-asset@v1.0.1
         env:
