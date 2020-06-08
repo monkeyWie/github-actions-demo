@@ -1,4 +1,4 @@
-测试 github actions v1.0.11
+测试 github actions v1.0.12
 
 
 [![Build Status](https://github.com/monkeyWie/github-actions-demo/workflows/build/badge.svg)](https://github.com/monkeyWie/github-actions-demo/actions?query=workflow%3Abuild)
