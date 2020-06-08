@@ -16,6 +16,11 @@ func TestSize(t *testing.T) {
 			args: args{a: -1},
 			want: "negative",
 		},
+		{
+			name: "test-0",
+			args: args{a: 0},
+			want: "zero",
+		},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
