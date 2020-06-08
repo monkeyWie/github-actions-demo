@@ -24,8 +24,8 @@ func TestUser_GetName(t *testing.T) {
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
 			user := &User{
-				name: tt.fields.name,
-				age:  tt.fields.age,
+				Name: tt.fields.name,
+				Age:  tt.fields.age,
 			}
 			if got := user.GetName(); got != tt.want {
 				t.Errorf("GetName() = %v, want %v", got, tt.want)
