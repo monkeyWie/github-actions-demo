@@ -5,6 +5,7 @@ on:
     # Sequence of patterns matched against refs/tags
     tags:
       - "v*" # Push events to matching v*, i.e. v1.0, v20.15.10
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -13,7 +14,7 @@ jobs:
       - uses: actions/checkout@v2
       - uses: actions/setup-go@v2
         with:
-          go-version: '^1.13.1'
+          go-version: "^1.13.1"
       - name: Build normal
         run: |
           CGO_ENABLED=0 GOOS=windows GOARCH=amd64 go build -ldflags="-w -s" -o normal-windows-x64.exe cmd/normal/main.go
@@ -22,16 +23,16 @@ jobs:
           zip normal-windows-x64.zip normal-windows-x64.exe
           zip normal-linux-x64.zip normal-linux-x64
           zip normal-darwin-x64.zip normal-darwin-x64
-#      - name: Build cgo
-#        run: |
-#          go get github.com/monkeyWie/xgo
-#          ~/go/bin/xgo -targets=windows/amd64,linux/amd64,darwin/amd64 -ldflags="-w -s" -pkg=cmd/cgo/main.go -out=cgo .
-#          mv cgo-windows-* cgo-windows-x64.exe
-#          mv cgo-linux-* cgo-linux-x64
-#          mv cgo-darwin-* cgo-darwin-x64
-#          zip cgo-windows-x64.zip cgo-windows-x64.exe
-#          zip cgo-linux-x64.zip cgo-linux-x64
-#          zip cgo-darwin-x64.zip cgo-darwin-x64
+      #      - name: Build cgo
+      #        run: |
+      #          go get github.com/monkeyWie/xgo
+      #          ~/go/bin/xgo -targets=windows/amd64,linux/amd64,darwin/amd64 -ldflags="-w -s" -pkg=cmd/cgo/main.go -out=cgo .
+      #          mv cgo-windows-* cgo-windows-x64.exe
+      #          mv cgo-linux-* cgo-linux-x64
+      #          mv cgo-darwin-* cgo-darwin-x64
+      #          zip cgo-windows-x64.zip cgo-windows-x64.exe
+      #          zip cgo-linux-x64.zip cgo-linux-x64
+      #          zip cgo-darwin-x64.zip cgo-darwin-x64
       - uses: release-drafter/release-drafter@v5
         id: create_release
         with:
@@ -67,7 +68,6 @@ jobs:
           asset_path: ./normal-darwin-x64.zip
           asset_name: normal-${{ steps.create_release.outputs.tag }}-darwin-x64.zip
           asset_content_type: application/zip
-
 #      - name: Upload Release cgo windows
 #        uses: actions/upload-release-asset@v1.0.1
 #        env:

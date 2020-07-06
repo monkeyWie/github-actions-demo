@@ -1,0 +1,23 @@
+name: release
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-18.04
+
+    steps:
+      - name: Install Qt
+        uses: jurplel/install-qt-action@v2
+        with:
+          version: 5.13.0
+        env:
+          QT_DIR: $RUNNER_WORKSPACE
+      - name: Test
+        run: |
+          echo $RUNNER_WORKSPACE
+          cd $RUNNER_WORKSPACE
+          ls -al
