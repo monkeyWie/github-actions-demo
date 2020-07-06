@@ -16,7 +16,7 @@ jobs:
           version: 5.13.0
       - name: Test
         env:
-          QT_DIR: ${{ env.RUNNER_WORKSPACE }}
+          QT_DIR: ${{ env.PATH }}
         run: |
           echo '11111'
           echo $Qt5_DIR
