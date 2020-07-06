@@ -15,7 +15,7 @@ jobs:
         with:
           version: 5.13.0
         env:
-          QT_DIR: $RUNNER_WORKSPACE
+          QT_DIR: ${{ env.RUNNER_WORKSPACE }}
       - name: Test
         run: |
           echo '11111'
@@ -24,4 +24,5 @@ jobs:
           echo $RUNNER_WORKSPACE
           echo '22222'
           cd $RUNNER_WORKSPACE
+          pwd
           ls -al
