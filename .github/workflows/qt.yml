@@ -14,10 +14,9 @@ jobs:
         uses: jurplel/install-qt-action@v2
         with:
           version: 5.13.0
-        run: echo $QT_DIR
+      - name: Test
         env:
           QT_DIR: ${{ env.RUNNER_WORKSPACE }}
-      - name: Test
         run: |
           echo '11111'
           echo $Qt5_DIR
