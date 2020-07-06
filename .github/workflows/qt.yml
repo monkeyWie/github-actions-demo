@@ -1,4 +1,4 @@
-name: test
+name: qt
 
 on:
   push:
@@ -18,7 +18,9 @@ jobs:
           QT_DIR: $RUNNER_WORKSPACE
       - name: Test
         run: |
-          echo $QT_DIR
-          echo $RUNNER_WORKSPACE
+          echo '11111'
+          echo '$QT_DIR'
+          echo '$RUNNER_WORKSPACE'
+          echo '22222'
           cd $RUNNER_WORKSPACE
           ls -al
