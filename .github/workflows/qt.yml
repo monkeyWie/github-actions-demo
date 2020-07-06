@@ -19,8 +19,9 @@ jobs:
       - name: Test
         run: |
           echo '11111'
-          echo '$QT_DIR'
-          echo '$RUNNER_WORKSPACE'
+          echo $Qt5_DIR
+          echo $QT_DIR
+          echo $RUNNER_WORKSPACE
           echo '22222'
           cd $RUNNER_WORKSPACE
           ls -al
