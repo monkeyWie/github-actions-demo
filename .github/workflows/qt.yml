@@ -25,4 +25,5 @@ jobs:
           echo '22222'
           cd $RUNNER_WORKSPACE
           pwd
-          ls -al
+          ls -al QT
+          ls -al github-actions-demo
