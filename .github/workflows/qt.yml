@@ -52,7 +52,7 @@ jobs:
   #         ls -al ./cmd/qt/deploy/linux
 
   mac-build:
-    runs-on: ubuntu-18.04
+    runs-on: macos-10.15
 
     steps:
       - name: Install Xcode
