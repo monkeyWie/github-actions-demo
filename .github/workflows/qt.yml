@@ -6,50 +6,50 @@ on:
       - master
 
 jobs:
-  window-build:
-    runs-on: ubuntu-18.04
+  # window-build:
+  #   runs-on: ubuntu-18.04
 
-    steps:
-      - name: Pull Docker Image
-        run: |
-          docker pull therecipe/qt:windows_64_static
+  #   steps:
+  #     - name: Pull Docker Image
+  #       run: |
+  #         docker pull therecipe/qt:windows_64_static
 
-      # - name: Install Qt
-      #   uses: jurplel/install-qt-action@v2
-      #   with:
-      #     version: 5.13.0
+  #     # - name: Install Qt
+  #     #   uses: jurplel/install-qt-action@v2
+  #     #   with:
+  #     #     version: 5.13.0
 
-      - uses: actions/setup-go@v2
-        with:
-          go-version: "^1.13.1"
+  #     - uses: actions/setup-go@v2
+  #       with:
+  #         go-version: "^1.13.1"
 
-      - uses: actions/checkout@v2
+  #     - uses: actions/checkout@v2
 
-      - name: Build
-        run: |
-          go get -v github.com/therecipe/qt/cmd/...
-          $(go env GOPATH)/bin/qtdeploy -docker build windows_64_static ./cmd/qt
-          ls -al ./cmd/qt/deploy/windows
+  #     - name: Build
+  #       run: |
+  #         go get -v github.com/therecipe/qt/cmd/...
+  #         $(go env GOPATH)/bin/qtdeploy -docker build windows_64_static ./cmd/qt
+  #         ls -al ./cmd/qt/deploy/windows
 
-  linux-build:
-    runs-on: ubuntu-18.04
+  # linux-build:
+  #   runs-on: ubuntu-18.04
 
-    steps:
-      - name: Pull Docker Image
-        run: |
-          docker pull therecipe/qt:linux_static
+  #   steps:
+  #     - name: Pull Docker Image
+  #       run: |
+  #         docker pull therecipe/qt:linux_static
 
-      - uses: actions/setup-go@v2
-        with:
-          go-version: "^1.13.1"
+  #     - uses: actions/setup-go@v2
+  #       with:
+  #         go-version: "^1.13.1"
 
-      - uses: actions/checkout@v2
+  #     - uses: actions/checkout@v2
 
-      - name: Build
-        run: |
-          go get -v github.com/therecipe/qt/cmd/...
-          $(go env GOPATH)/bin/qtdeploy -docker build linux_static ./cmd/qt
-          ls -al ./cmd/qt/deploy/linux
+  #     - name: Build
+  #       run: |
+  #         go get -v github.com/therecipe/qt/cmd/...
+  #         $(go env GOPATH)/bin/qtdeploy -docker build linux_static ./cmd/qt
+  #         ls -al ./cmd/qt/deploy/linux
 
   mac-build:
     runs-on: macos-10.15
@@ -67,6 +67,8 @@ jobs:
       - uses: actions/checkout@v2
 
       - name: Build
+        env:
+          QT_DIR: ${{ github.workspace }}${{ '/Qt' }}
         run: |
           go get -v github.com/therecipe/qt/cmd/...
           $(go env GOPATH)/bin/qtdeploy build desktop ./cmd/qt
