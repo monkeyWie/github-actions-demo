@@ -55,13 +55,13 @@ jobs:
     runs-on: ubuntu-18.04
 
     steps:
+      - name: Install Xcode
+        run: "xcode-select --install"
+
       - name: Install Qt
         uses: jurplel/install-qt-action@v2
         with:
           version: 5.13.0
-
-      - uses: Install 
-        run: "xcode-select --install"
 
       - uses: actions/setup-go@v2
         with:
