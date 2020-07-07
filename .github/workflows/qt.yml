@@ -76,10 +76,11 @@ jobs:
 
       - name: Build
         env:
-          QT_DIR: ${{ github.workspace }}${{ '/Qt' }}
+          QT_DIR2: ${{ github.workspace }}${{ '/Qt' }}
         run: |
+          echo 'QT_DIR:'$QT_DIR2
           go get -v github.com/therecipe/qt/cmd/...
           go mod vendor
           git clone https://github.com/therecipe/env_darwin_amd64_513.git vendor/github.com/therecipe/env_darwin_amd64_513
           $(go env GOPATH)/bin/qtdeploy build desktop ./cmd/qt
-          ls -al ./cmd/qt/deploy
+          ls -al ./cmd/qt/deploy/darwin
