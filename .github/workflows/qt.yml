@@ -20,7 +20,7 @@ jobs:
       - uses: actions/checkout@v2
       - name: Test
         env:
-          QT_DIR: ${{ github.workspace'/Qt' }}
+          QT_DIR: ${{ github.workspace }}${{ '/Qt' }}
         run: |
           echo '11111'
           echo $Qt5_DIR
