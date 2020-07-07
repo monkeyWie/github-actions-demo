@@ -55,13 +55,13 @@ jobs:
     runs-on: macos-10.15
 
     steps:
-      # - name: Install Xcode
-      #   uses: sinoru/actions-setup-xcode@v1.1
-      #   with:
-      #     xcode-version: "11.2.1" # Exact version of a Xcode version to use
-
       - name: Install Xcode
-        run: "xcode-select --install"
+        uses: sinoru/actions-setup-xcode@v1.1
+        with:
+          xcode-version: "11.2.1" # Exact version of a Xcode version to use
+
+      # - name: Install Xcode
+      #   run: "xcode-select --install"
 
       - name: Install Qt
         uses: jurplel/install-qt-action@v2
@@ -79,5 +79,7 @@ jobs:
           QT_DIR: ${{ github.workspace }}${{ '/Qt' }}
         run: |
           go get -v github.com/therecipe/qt/cmd/...
+          go mod vendor
+          git clone https://github.com/therecipe/env_darwin_amd64_513.git vendor/github.com/therecipe/env_darwin_amd64_513
           $(go env GOPATH)/bin/qtdeploy build desktop ./cmd/qt
           ls -al ./cmd/qt/deploy
