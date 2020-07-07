@@ -20,6 +20,7 @@ jobs:
           QT_DIR: ${{ github.workspace }}
         run: |
           echo '11111'
+          pwd
           echo $QT_DIR
           echo $RUNNER_WORKSPACE
           echo '22222'
