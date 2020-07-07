@@ -1,13 +1,8 @@
-import QtQuick 2.7			//ApplicationWindow
+import QtQuick 2.7			//Item
 import QtQuick.Controls 2.1	//Dialog
 
-ApplicationWindow {
+Item {
 	id: window
-
-	visible: true
-	title: "Hello QML Example"
-	minimumWidth: 250
-	minimumHeight: 200
 
 	Column {
 		anchors.centerIn: parent

@@ -24,15 +24,14 @@ jobs:
         run: |
           go get -v github.com/therecipe/qt/cmd/...
           $(go env GOPATH)/bin/qtdeploy -docker build windows_64_static ./cmd/qt
-          ls -al cmd/qt/deploy/windows
-          cd cmd/qt/deploy/windows
+          cd cmd/app/deploy/windows
           zip -r app.zip ./*
 
       - name: Upload
         uses: actions/upload-artifact@v1
         with:
           name: windows
-          path: cmd/qt/deploy/windows/app.zip
+          path: cmd/app/deploy/windows/app.zip
 
   linux-build:
     runs-on: ubuntu-18.04
@@ -52,15 +51,14 @@ jobs:
         run: |
           go get -v github.com/therecipe/qt/cmd/...
           $(go env GOPATH)/bin/qtdeploy -docker build linux_static ./cmd/qt
-          ls -al ./cmd/qt/deploy/linux
-          cd cmd/qt/deploy/linux
+          cd cmd/app/deploy/linux
           zip -r app.zip ./*
 
       - name: Upload
         uses: actions/upload-artifact@v1
         with:
           name: linux
-          path: cmd/qt/deploy/linux/app.zip
+          path: cmd/app/deploy/linux/app.zip
 
   darwin-build:
     runs-on: macos-10.15
@@ -86,15 +84,14 @@ jobs:
       - name: Build
         run: |
           $(go env GOPATH)/bin/qtdeploy build desktop ./cmd/qt
-          ls -al ./cmd/qt/deploy/darwin
-          cd cmd/qt/deploy/darwin
+          cd cmd/app/deploy/darwin
           zip -r app.zip ./*
 
       - name: Upload
         uses: actions/upload-artifact@v1
         with:
           name: darwin
-          path: cmd/qt/deploy/darwin/app.zip
+          path: cmd/app/deploy/darwin/app.zip
 
   create-release:
     needs: [window-build, linux-build, darwin-build]
