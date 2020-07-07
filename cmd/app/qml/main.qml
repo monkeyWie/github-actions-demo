@@ -10,6 +10,7 @@ Item {
 		TextField {
 			id: input
 	
+			selectByMouse: true
 			anchors.horizontalCenter: parent.horizontalCenter
 			placeholderText: "Write something ..."
 		}
