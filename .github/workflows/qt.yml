@@ -67,7 +67,6 @@ jobs:
 
     steps:
       - name: Install Qt
-        if: steps.get-cache.outputs.cache-hit != 'true'
         uses: jurplel/install-qt-action@v2
         with:
           version: 5.13.0
