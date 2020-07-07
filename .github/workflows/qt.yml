@@ -60,6 +60,9 @@ jobs:
         with:
           version: 5.13.0
 
+      - uses: Install 
+        run: "xcode-select --install"
+
       - uses: actions/setup-go@v2
         with:
           go-version: "^1.13.1"
