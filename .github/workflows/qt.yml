@@ -18,17 +18,9 @@ jobs:
         with:
           go-version: "^1.13.1"
       - uses: actions/checkout@v2
-      - name: Test
-        env:
-          QT_DIR: ${{ github.workspace }}${{ '/Qt' }}
+      - name: Build
         run: |
-          echo '11111'
-          echo $Qt5_DIR
-          echo $QT_DIR
-          echo $RUNNER_WORKSPACE
-          echo '22222'
-          cd $RUNNER_WORKSPACE
-          pwd
-          ls -al
-          ls -al Qt
-          ls -al github-actions-demo
+          export QT_DIR=$RUNNER_WORKSPACE/Qt
+          go get -v github.com/therecipe/qt/cmd/...
+          $(go env GOPATH)/bin/qtdeploy build desktop ./basic/widgets
+          ls -al ./basic/widgets/deploy/linux
