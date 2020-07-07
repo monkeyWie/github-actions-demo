@@ -26,7 +26,7 @@ jobs:
           $(go env GOPATH)/bin/qtdeploy -docker build windows_64_static ./cmd/qt
           ls -al cmd/qt/deploy/windows
           cd cmd/qt/deploy/windows
-          zip app.zip ./*
+          zip -r app.zip ./*
 
       - name: Upload
         uses: actions/upload-artifact@v1
@@ -54,7 +54,7 @@ jobs:
           $(go env GOPATH)/bin/qtdeploy -docker build linux_static ./cmd/qt
           ls -al ./cmd/qt/deploy/linux
           cd cmd/qt/deploy/linux
-          zip app.zip ./*
+          zip -r app.zip ./*
 
       - name: Upload
         uses: actions/upload-artifact@v1
@@ -89,7 +89,7 @@ jobs:
           $(go env GOPATH)/bin/qtdeploy build desktop ./cmd/qt
           ls -al ./cmd/qt/deploy/darwin
           cd cmd/qt/deploy/darwin
-          zip app.zip ./*
+          zip -r app.zip ./*
 
       - name: Upload
         uses: actions/upload-artifact@v1
