@@ -3,49 +3,38 @@ package main
 import (
 	"os"
 
-	"github.com/therecipe/qt/widgets"
+	"github.com/therecipe/qt/core"
+	"github.com/therecipe/qt/gui"
+	"github.com/therecipe/qt/qml"
+	"github.com/therecipe/qt/quickcontrols2"
 )
 
 func main() {
 
-	// needs to be called once before you can start using the QWidgets
-	app := widgets.NewQApplication(len(os.Args), os.Args)
+	// enable high dpi scaling
+	// useful for devices with high pixel density displays
+	// such as smartphones, retina displays, ...
+	core.QCoreApplication_SetAttribute(core.Qt__AA_EnableHighDpiScaling, true)
 
-	// create a window
-	// with a minimum size of 250*200
-	// and sets the title to "Hello Widgets Example"
-	window := widgets.NewQMainWindow(nil, 0)
-	window.SetMinimumSize2(250, 200)
-	window.SetWindowTitle("Hello Widgets Example")
+	// needs to be called once before you can start using QML
+	gui.NewQGuiApplication(len(os.Args), os.Args)
 
-	// create a regular widget
-	// give it a QVBoxLayout
-	// and make it the central widget of the window
-	widget := widgets.NewQWidget(nil, 0)
-	widget.SetLayout(widgets.NewQVBoxLayout())
-	window.SetCentralWidget(widget)
+	// use the material style
+	// the other inbuild styles are:
+	// Default, Fusion, Imagine, Universal
+	quickcontrols2.QQuickStyle_SetStyle("Material")
 
-	// create a line edit
-	// with a custom placeholder text
-	// and add it to the central widgets layout
-	input := widgets.NewQLineEdit(nil)
-	input.SetPlaceholderText("Write something ...")
-	widget.Layout().AddWidget(input)
+	// create the qml application engine
+	engine := qml.NewQQmlApplicationEngine(nil)
 
-	// create a button
-	// connect the clicked signal
-	// and add it to the central widgets layout
-	button := widgets.NewQPushButton2("and click me!", nil)
-	button.ConnectClicked(func(bool) {
-		widgets.QMessageBox_Information(nil, "OK", input.Text(), widgets.QMessageBox__Ok, widgets.QMessageBox__Ok)
-	})
-	widget.Layout().AddWidget(button)
-
-	// make the window visible
-	window.Show()
+	// load the embedded qml file
+	// created by either qtrcc or qtdeploy
+	engine.Load(core.NewQUrl3("qrc:/qml/main.qml", 0))
+	// you can also load a local file like this instead:
+	//engine.Load(core.QUrl_FromLocalFile("./qml/main.qml"))
 
 	// start the main Qt event loop
 	// and block until app.Exit() is called
 	// or the window is closed by the user
-	app.Exec()
+	gui.QGuiApplication_Exec()
 }
