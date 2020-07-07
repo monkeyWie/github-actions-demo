@@ -23,7 +23,7 @@ jobs:
       - name: Build
         run: |
           go get -v github.com/therecipe/qt/cmd/...
-          $(go env GOPATH)/bin/qtdeploy -docker build windows_64_static ./cmd/qt
+          $(go env GOPATH)/bin/qtdeploy -docker build windows_64_static ./cmd/app
           cd cmd/app/deploy/windows
           zip -r app.zip ./*
 
@@ -50,7 +50,7 @@ jobs:
       - name: Build
         run: |
           go get -v github.com/therecipe/qt/cmd/...
-          $(go env GOPATH)/bin/qtdeploy -docker build linux_static ./cmd/qt
+          $(go env GOPATH)/bin/qtdeploy -docker build linux_static ./cmd/app
           cd cmd/app/deploy/linux
           zip -r app.zip ./*
 
@@ -83,7 +83,7 @@ jobs:
 
       - name: Build
         run: |
-          $(go env GOPATH)/bin/qtdeploy build desktop ./cmd/qt
+          $(go env GOPATH)/bin/qtdeploy build desktop ./cmd/app
           cd cmd/app/deploy/darwin
           zip -r app.zip ./*
 
