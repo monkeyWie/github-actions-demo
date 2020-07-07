@@ -108,10 +108,10 @@ jobs:
         with:
           name: linux
 
-      - name: Download Darwin
-        uses: actions/download-artifact@v1
-        with:
-          name: darwin
+      # - name: Download Darwin
+      #   uses: actions/download-artifact@v1
+      #   with:
+      #     name: darwin
       
       - name: Create Release
         id: create_release
