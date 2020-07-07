@@ -22,5 +22,6 @@ jobs:
         run: |
           export QT_DIR=$RUNNER_WORKSPACE/Qt
           go get -v github.com/therecipe/qt/cmd/...
-          $(go env GOPATH)/bin/qtdeploy build desktop ./basic/widgets
-          ls -al ./basic/widgets/deploy/linux
+          go mod vendor
+          $(go env GOPATH)/bin/qtdeploy build desktop ./cmd/qt
+          ls -al ./cmd/qt/deploy/linux
