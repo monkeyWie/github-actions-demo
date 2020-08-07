@@ -13,7 +13,7 @@ jobs:
     steps:
       - uses: actions/setup-go@v2
         with:
-          go-version: "^1.13.1"
+          go-version: '^1.13.1'
       - uses: actions/checkout@v2
       - name: Lint Go Code
         run: |
@@ -26,7 +26,7 @@ jobs:
     steps:
       - uses: actions/setup-go@v2
         with:
-          go-version: "^1.13.1"
+          go-version: '^1.13.1'
       - uses: actions/checkout@v2
       - name: Run Unit tests.
         run: go test ./... -v -covermode=count -coverprofile=coverage.txt
@@ -41,7 +41,7 @@ jobs:
     steps:
       - uses: actions/setup-go@v2
         with:
-          go-version: "^1.13.1"
+          go-version: '^1.13.1'
       - uses: actions/checkout@v2
       - name: Build
         run: go build -o bin/main cmd/normal/main.go
