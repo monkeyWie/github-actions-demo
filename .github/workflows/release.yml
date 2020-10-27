@@ -33,10 +33,6 @@ jobs:
       #     zip cgo-darwin-x64.zip cgo-darwin-x64
       - uses: release-drafter/release-drafter@v5
         id: create_release
-        with:
-          tag: ${{ github.ref }}
-        # (Optional) specify config name to use, relative to .github/. Default: release-drafter.yml
-        # config-name: my-config.yml
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Upload Release normal windows
