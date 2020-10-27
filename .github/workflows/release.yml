@@ -2,9 +2,8 @@ name: release
 
 on:
   push:
-    # Sequence of patterns matched against refs/tags
-    tags:
-      - "v*" # Push events to matching v*, i.e. v1.0, v20.15.10
+    branches:
+      - master
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -12,8 +11,6 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-go@v2
-        with:
-          go-version: '^1.13.1'
       - name: Build normal
         run: |
           CGO_ENABLED=0 GOOS=windows GOARCH=amd64 go build -ldflags="-w -s" -o normal-windows-x64.exe cmd/normal/main.go
@@ -22,16 +19,16 @@ jobs:
           zip normal-windows-x64.zip normal-windows-x64.exe
           zip normal-linux-x64.zip normal-linux-x64
           zip normal-darwin-x64.zip normal-darwin-x64
-#      - name: Build cgo
-#        run: |
-#          go get github.com/monkeyWie/xgo
-#          ~/go/bin/xgo -targets=windows/amd64,linux/amd64,darwin/amd64 -ldflags="-w -s" -pkg=cmd/cgo/main.go -out=cgo .
-#          mv cgo-windows-* cgo-windows-x64.exe
-#          mv cgo-linux-* cgo-linux-x64
-#          mv cgo-darwin-* cgo-darwin-x64
-#          zip cgo-windows-x64.zip cgo-windows-x64.exe
-#          zip cgo-linux-x64.zip cgo-linux-x64
-#          zip cgo-darwin-x64.zip cgo-darwin-x64
+      - name: Build cgo
+        run: |
+          go get github.com/monkeyWie/xgo
+          ~/go/bin/xgo -targets=windows/amd64,linux/amd64,darwin/amd64 -ldflags="-w -s" -pkg=cmd/cgo/main.go -out=cgo .
+          mv cgo-windows-* cgo-windows-x64.exe
+          mv cgo-linux-* cgo-linux-x64
+          mv cgo-darwin-* cgo-darwin-x64
+          zip cgo-windows-x64.zip cgo-windows-x64.exe
+          zip cgo-linux-x64.zip cgo-linux-x64
+          zip cgo-darwin-x64.zip cgo-darwin-x64
       - uses: release-drafter/release-drafter@v5
         id: create_release
         with:
@@ -67,31 +64,30 @@ jobs:
           asset_path: ./normal-darwin-x64.zip
           asset_name: normal-${{ steps.create_release.outputs.name }}-darwin-x64.zip
           asset_content_type: application/zip
-
-#      - name: Upload Release cgo windows
-#        uses: actions/upload-release-asset@v1.0.1
-#        env:
-#          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-#        with:
-#          upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps
-#          asset_path: ./cgo-windows-x64.zip
-#          asset_name: cgo-${{ steps.create_release.outputs.tag }}-windows-x64.zip
-#          asset_content_type: application/zip
-#      - name: Upload Release cgo linux
-#        uses: actions/upload-release-asset@v1.0.1
-#        env:
-#          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-#        with:
-#          upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps
-#          asset_path: ./cgo-linux-x64.zip
-#          asset_name: cgo-${{ steps.create_release.outputs.tag }}-linux-x64.zip
-#          asset_content_type: application/zip
-#      - name: Upload Release cgo darwin
-#        uses: actions/upload-release-asset@v1.0.1
-#        env:
-#          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-#        with:
-#          upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps
-#          asset_path: ./cgo-darwin-x64.zip
-#          asset_name: cgo-${{ steps.create_release.outputs.tag }}-darwin-x64.zip
-#          asset_content_type: application/zip
+      - name: Upload Release cgo windows
+        uses: actions/upload-release-asset@v1.0.1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps
+          asset_path: ./cgo-windows-x64.zip
+          asset_name: cgo-${{ steps.create_release.outputs.name }}-windows-x64.zip
+          asset_content_type: application/zip
+      - name: Upload Release cgo linux
+        uses: actions/upload-release-asset@v1.0.1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps
+          asset_path: ./cgo-linux-x64.zip
+          asset_name: cgo-${{ steps.create_release.outputs.name }}-linux-x64.zip
+          asset_content_type: application/zip
+      - name: Upload Release cgo darwin
+        uses: actions/upload-release-asset@v1.0.1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps
+          asset_path: ./cgo-darwin-x64.zip
+          asset_name: cgo-${{ steps.create_release.outputs.name }}-darwin-x64.zip
+          asset_content_type: application/zip
