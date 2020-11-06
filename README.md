@@ -1,6 +1,7 @@
 测试 github actions v1.0.20
 test1
 test2
+test3
 
 
 [![Build Status](https://github.com/monkeyWie/github-actions-demo/workflows/build/badge.svg)](https://github.com/monkeyWie/github-actions-demo/actions?query=workflow%3Abuild)
