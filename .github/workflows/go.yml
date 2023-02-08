@@ -13,5 +13,6 @@ jobs:
     steps:
     - name: Test
       run: |
-        Get-ChildItem -Path C:\ -Recurse –Include "*.isl"
+        ls C:\Program Files (x86)
+        ls C:\Program Files
         
