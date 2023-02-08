@@ -13,6 +13,6 @@ jobs:
     steps:
     - name: Test
       run: |
-        ls "C:\Program Files (x86)"
-        ls "C:\Program Files"
+        ls "C:\Program Files (x86)\Inno Setup 6"
+        ls "C:\Program Files (x86)\Inno Setup 6\Languages"
         
