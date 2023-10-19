@@ -13,10 +13,10 @@ jobs:
     steps:
     - name: Test
       run: |
-        ls C:\Program Files\Git\mingw64\bin
-        ls C:\Strawberry\c\bin
-        ls C:\Strawberry\perl\bin
-        ls C:\ProgramData\Chocolatey\lib\mingw\tools\install\mingw64\bin
+        ls "C:\Program Files\Git\mingw64\bin"
+        ls "C:\Strawberry\c\bin"
+        ls "C:\Strawberry\perl\bin"
+        ls "C:\ProgramData\Chocolatey\lib\mingw\tools\install\mingw64\bin"
         where libstdc++-6.dll
         
         
