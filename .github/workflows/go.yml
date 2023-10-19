@@ -13,5 +13,7 @@ jobs:
     steps:
     - name: Test
       run: |
+        ls $mingw 
         where libstdc++-6.dll
+        
         
