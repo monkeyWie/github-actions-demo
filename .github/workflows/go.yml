@@ -13,16 +13,10 @@ jobs:
     steps:
     - name: Test
       run: |
-        echo "111"
         ls C:\Program Files\Git\mingw64\bin
-        echo "222"
         ls C:\Strawberry\c\bin
-        echo "333"
         ls C:\Strawberry\perl\bin
-        echo "444"
         ls C:\ProgramData\Chocolatey\lib\mingw\tools\install\mingw64\bin
-        echo "555"
         where libstdc++-6.dll
-        echo "666"
         
         
